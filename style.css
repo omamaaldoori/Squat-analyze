@@ -1,0 +1,278 @@
+/* ═══════════════════════════════════════
+   SportForm AI — Squat Analizi v4
+   Ana Stil Dosyası
+═══════════════════════════════════════ */
+
+/* Reset & Base */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #0d0f14;
+  color: #e8e6e0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ── */
+header {
+  background: #13161d;
+  border-bottom: 1px solid #2a2f3d;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+header h1 { font-size: 17px; font-weight: 700; color: #4fffb0; }
+header small { font-size: 11px; color: #6b7385; font-family: monospace; }
+.key-wrap { margin-left: auto; }
+.key-input {
+  background: #1a1e28;
+  border: 1px solid #2a2f3d;
+  color: #e8e6e0;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: monospace;
+  width: 260px;
+  outline: none;
+}
+.key-input:focus { border-color: #7c6fff; }
+
+/* ── Layout ── */
+.layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  overflow: hidden;
+}
+
+/* ── Video Ana Bölüm ── */
+.vmain { display: flex; flex-direction: column; overflow: hidden; }
+
+.upload {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 32px;
+}
+.dropbox {
+  width: 100%;
+  max-width: 480px;
+  border: 2px dashed #2a2f3d;
+  border-radius: 14px;
+  padding: 40px 24px;
+  text-align: center;
+  cursor: pointer;
+  background: #13161d;
+  transition: all .2s;
+}
+.dropbox:hover,
+.dropbox.over {
+  border-color: rgba(79,255,176,.6);
+  background: rgba(79,255,176,.03);
+}
+.dropbox h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+.dropbox p  { font-size: 12px; color: #6b7385; margin-bottom: 20px; }
+
+/* Butonlar */
+.bp {
+  background: #4fffb0;
+  color: #0d0f14;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+.bs {
+  background: none;
+  color: #e8e6e0;
+  border: 1px solid #2a2f3d;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.bs:hover { border-color: #6b7385; background: #1a1e28; }
+.bs-sm    { padding: 5px 11px; font-size: 12px; }
+input[type=file] { display: none; }
+
+/* ── Video Zone ── */
+.vzone         { flex: 1; display: none; flex-direction: column; }
+.vzone.show    { display: flex; }
+
+.vhead {
+  padding: 8px 14px;
+  background: #13161d;
+  border-bottom: 1px solid #2a2f3d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.vhead span    { font-size: 12px; font-family: monospace; }
+
+/* Durum Noktası */
+.dot           { width: 7px; height: 7px; border-radius: 50%; background: #2a2f3d; display: inline-block; margin-right: 7px; }
+.dot.go        { background: #ffb74d; box-shadow: 0 0 6px #ffb74d; animation: blink 1s infinite; }
+.dot.ok        { background: #4fffb0; }
+@keyframes blink { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+/* ── Video Wrapper ── */
+.vwrap {
+  flex: 1;
+  position: relative;
+  background: #000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+#vid { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+#cvs { position: absolute; pointer-events: none; top: 0; left: 0; }
+
+/* ── Video Footer ── */
+.vfoot {
+  padding: 9px 14px;
+  background: #13161d;
+  border-top: 1px solid #2a2f3d;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.progbar  { flex: 1; height: 4px; background: #222736; border-radius: 2px; overflow: hidden; }
+.progfill {
+  height: 100%;
+  background: linear-gradient(90deg, #4fffb0, #7c6fff);
+  width: 0%;
+  transition: width .35s;
+  border-radius: 2px;
+}
+#smsg { font-size: 11px; font-family: monospace; color: #6b7385; min-width: 190px; }
+
+/* ── Sağ Panel ── */
+.rpanel {
+  background: #13161d;
+  border-left: 1px solid #2a2f3d;
+  overflow-y: auto;
+  padding: 14px;
+  width: 300px;
+  flex-shrink: 0;
+}
+.rtitle { font-size: 10px; letter-spacing: 2px; color: #6b7385; text-transform: uppercase; margin-bottom: 14px; }
+.empty  { text-align: center; padding: 60px 12px; color: #6b7385; }
+.empty .ico { font-size: 32px; opacity: .2; margin-bottom: 10px; }
+.sec {
+  font-size: 10px; font-weight: 600; color: #6b7385;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin: 14px 0 7px;
+}
+
+/* ── Skor Halkası ── */
+.ring-wrap    { text-align: center; margin-bottom: 12px; }
+.ring-svg     { transform: rotate(-90deg); }
+.rb           { fill: none; stroke: #222736; stroke-width: 6; }
+.rf           { fill: none; stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 1.2s ease; }
+.snum         { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.sval         { font-size: 26px; font-weight: 700; font-family: monospace; }
+.ssub         { font-size: 10px; color: #6b7385; }
+
+/* ── Verdict ── */
+.verdict { text-align: center; padding: 7px; border-radius: 7px; font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+.vc      { background: rgba(79,255,176,.1);  color: #4fffb0;  border: 1px solid rgba(79,255,176,.2); }
+.vp      { background: rgba(255,183,77,.1);  color: #ffb74d;  border: 1px solid rgba(255,183,77,.2); }
+.vi      { background: rgba(255,107,107,.1); color: #ff6b6b;  border: 1px solid rgba(255,107,107,.2); }
+
+/* ── Skor Grid ── */
+.sgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 12px; }
+.scell { background: #1a1e28; border-radius: 7px; padding: 9px; text-align: center; }
+.sv    { font-size: 20px; font-weight: 700; font-family: monospace; color: #e8e6e0; }
+.sl    { font-size: 10px; color: #6b7385; margin-top: 2px; }
+
+/* ── Joint Satırı ── */
+.jrow { display: flex; align-items: center; gap: 7px; padding: 7px; background: #1a1e28; border-radius: 6px; margin-bottom: 4px; }
+.jn   { font-size: 11px; font-family: monospace; color: #e8e6e0; width: 76px; flex-shrink: 0; }
+.bw   { flex: 1; height: 4px; background: #222736; border-radius: 2px; overflow: hidden; }
+.b    { height: 100%; border-radius: 2px; transition: width .7s; }
+.bg   { background: #4fffb0; }
+.byw  { background: #ffb74d; }
+.br   { background: #ff6b6b; }
+.ja   { font-size: 10px; font-family: monospace; color: #6b7385; width: 34px; text-align: right; flex-shrink: 0; }
+.ji   { font-size: 11px; width: 14px; }
+
+/* ── Hata Kartı ── */
+.ecard { padding: 8px 10px; border-radius: 7px; margin-bottom: 5px; }
+.eh    { background: rgba(255,107,107,.07); border: 1px solid rgba(255,107,107,.2); }
+.em    { background: rgba(255,183,77,.07);  border: 1px solid rgba(255,183,77,.2); }
+.elbl  { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+.eh .elbl { color: #ff6b6b; }
+.em .elbl { color: #ffb74d; }
+.en   { font-size: 12px; font-weight: 600; color: #e8e6e0; margin-bottom: 2px; }
+.ed   { font-size: 11px; color: #6b7385; line-height: 1.4; }
+
+/* ── AI Kutusu ── */
+.aibox { background: #1a1e28; border: 1px solid #2a2f3d; border-radius: 8px; padding: 11px; margin-top: 8px; }
+.ailbl { font-size: 10px; font-weight: 600; color: #7c6fff; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+.aitxt { font-size: 12px; color: #e8e6e0; line-height: 1.7; white-space: pre-wrap; }
+.think { display: flex; gap: 4px; padding: 4px 0; }
+.td    { width: 6px; height: 6px; border-radius: 50%; background: #6b7385; animation: pu 1.4s infinite; }
+.td:nth-child(2) { animation-delay: .2s; }
+.td:nth-child(3) { animation-delay: .4s; }
+@keyframes pu { 0%,80%,100%{opacity:.3;transform:scale(.8)} 40%{opacity:1;transform:scale(1)} }
+
+/* ── Bilgi Kutusu ── */
+.infobox    { background: #1a1e28; border: 1px solid #2a2f3d; border-radius: 8px; padding: 11px; margin-bottom: 14px; }
+.infobox h3 { font-size: 12px; font-weight: 600; color: #4fffb0; margin-bottom: 7px; }
+.infobox li { font-size: 11px; color: #6b7385; padding: 2px 0; list-style: none; }
+.infobox li::before { content: '→ '; color: #4fffb0; }
+
+/* ── Faz Badge ── */
+.phase-badge {
+  position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+  z-index: 10; padding: 5px 16px; border-radius: 20px;
+  font-size: 13px; font-weight: 700; font-family: monospace;
+  letter-spacing: 1px; pointer-events: none; display: none;
+  transition: all .3s ease;
+}
+.phase-badge.standing {
+  background: rgba(79,255,176,.15); color: #4fffb0;
+  border: 1.5px solid rgba(79,255,176,.5);
+  box-shadow: 0 0 16px rgba(79,255,176,.2);
+}
+.phase-badge.squat {
+  background: rgba(124,111,255,.15); color: #7c6fff;
+  border: 1.5px solid rgba(124,111,255,.5);
+  box-shadow: 0 0 16px rgba(124,111,255,.2);
+}
+.phase-badge.transition {
+  background: rgba(255,183,77,.1); color: #ffb74d;
+  border: 1.5px solid rgba(255,183,77,.3);
+}
+
+
+/* ── Faz Panel Grid ── */
+.phase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+.pcell      { background: #1a1e28; border-radius: 7px; padding: 8px; border: 1px solid #2a2f3d; }
+.pcell.standing-cell { border-color: rgba(79,255,176,.25); }
+.pcell.squat-cell    { border-color: rgba(124,111,255,.25); }
+.pclbl { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; font-weight: 600; }
+.standing-cell .pclbl { color: #4fffb0; }
+.squat-cell    .pclbl { color: #7c6fff; }
+.pcval { font-size: 18px; font-weight: 700; font-family: monospace; color: #e8e6e0; }
+
+/* ── Yardımcı ── */
+.vname-mono  { font-family: monospace; font-size: 12px; }
+.format-hint { font-family: monospace; font-size: 11px; }
+.empty-hint  { font-size: 13px; }
+.hidden      { display: none; }

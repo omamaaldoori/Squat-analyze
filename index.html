@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Squat Analiz v4 — SportForm AI</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>SportForm AI — Squat Analizi v4</h1>
+  <small>Örüntü Tanıma Sistemleri · Final 2026 · Faz Tabanlı</small>
+</header>
+
+<div class="layout">
+
+  <div class="vmain">
+
+    <div class="upload" id="upload">
+      <div class="dropbox" id="dropbox">
+        <h3>📹 Squat Videosu Yükle</h3>
+        <p>Video dosyasını sürükle veya seç<br><span class="format-hint">MP4 · MOV · AVI · WebM</span></p>
+        <button class="bp" onclick="document.getElementById('fv').click()">Video Seç</button>
+        <input type="file" id="fv" accept="video/*" aria-label="Squat Videosu Yükle">
+      </div>
+
+    </div>
+
+    <div class="vzone" id="vzone">
+      <div class="vhead">
+        <div>
+          <span class="dot" id="sdot"></span>
+          <span id="vname" class="vname-mono">video.mp4</span>
+        </div>
+        <button class="bs bs-sm" onclick="reset()">↩ Yeni Video</button>
+      </div>
+
+      <div class="vwrap" id="vwrap">
+        <video id="vid" controls muted></video>
+        <canvas id="cvs"></canvas>
+        <div class="phase-badge" id="phaseBadge">DURUŞ</div>
+
+      </div>
+
+      <div class="vfoot">
+        <span id="smsg">Analiz için hazır</span>
+        <div class="progbar"><div class="progfill" id="pfill"></div></div>
+        <button class="bp" id="abtn" onclick="startAnalysis()">Analiz Et →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="rpanel">
+    <div class="rtitle">Analiz Sonucu</div>
+
+    <div class="infobox">
+      <h3>Squat — Faz Analizi</h3>
+      <ul>
+        <li><span class="phase-durus">DURUŞ:</span> Diz 170-180°, sırt dik</li>
+       <li><span class="phase-cokus">ÇÖKÜŞ:</span> Diz 70-110°, kalça paralel</li>
+        <li>Dizler ayak parmağı hizasında kalmalı</li>
+        <li>Topuklar zeminde sabit</li>
+      </ul>
+    </div>
+
+    <div class="empty" id="empty">
+      <div class="ico">🎯</div>
+      <div class="empty-hint">Video yükle ve Analiz Et tuşuna bas</div>
+    </div>
+    <div id="rpanel-inner" class="hidden"></div>
+  </div>
+
+</div>
+
+<script src="js/constants.js"></script>
+<script src="js/state.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/pose.js"></script>
+<script src="js/analysis.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/ui.js"></script>
+
+</body>
+</html>
